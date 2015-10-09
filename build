@@ -1,0 +1,15 @@
+#!/bin/bash -e
+name=elasticsearch
+
+image_namespace="$USER"
+version=`date +%Y%m%d%H%M%S`
+
+echo "building ${image_namespace}/${name}"
+docker build -t ${image_namespace}/${name} .
+docker tag ${image_namespace}/${name} ${image_namespace}/${name}:${version}
+
+if [[ `basename $0` == "push" ]]; then
+    docker push ${image_namespace}/${name}
+fi
+
+

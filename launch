@@ -1,0 +1,10 @@
+#!/bin/bash
+name=elasticsearch
+docker rm -f $USER-$name
+#docker run -it -v $PWD:/app --name $USER-$name $USER/$name bash
+#docker run -it --name $USER-$name $USER/$name bash
+if [[ -n $1 ]] ; then
+  docker run -it  -v $PWD:/root --name $USER-$name $USER/$name bash
+else
+  docker run -d-v $PWD:/root --name $USER-$name $USER/$name
+fi
